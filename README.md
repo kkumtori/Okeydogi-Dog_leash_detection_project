@@ -9,9 +9,9 @@
 
 ## 💡 데이터 수집
 + __Kaggle__   
-Stanford Dogs Dataset, Cats-vs-Dogs, Cat and Dog
+[Stanford Dogs Dataset](https://www.kaggle.com/datasets/jessicali9530/stanford-dogs-dataset), [Cats-vs-Dogs](https://www.kaggle.com/datasets/shaunthesheep/microsoft-catsvsdogs-dataset), [Cat and Dog](https://www.kaggle.com/datasets/tongpython/cat-and-dog)  
 + __Roboflow__   
-Dog with Leash, Computer Vision Project
+[Dog with Leash](https://universe.roboflow.com/animal-detection/dog-with-leash/dataset/4), [Microsoft COCO 2017 Dataset](https://public.roboflow.com/object-detection/microsoft-coco-subset)
 + __Public Data__   
 keyword : walk with dog, 반려견 산책
 + __Youtube__   
