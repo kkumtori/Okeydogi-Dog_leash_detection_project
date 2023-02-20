@@ -24,3 +24,4 @@ keyword : dog bite attack, cctv live cam
 ### ✅ __ResNet__ : Binary Classification  
   
 ## 💡 웹페이지 구현  
+## 💡 실시간 장치 제작  
