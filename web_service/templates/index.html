@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='./assets/images/CI_v1.png') }}"
+      type="image/x-icon"
+    />
+    <title>Dog without LEASH Detection | OKDG Admin</title>
+
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/lineicons.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/materialdesignicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/fancybox.css') }}"
+    />
+  </head>
+  <body>   
+    <!-- ======== main-wrapper start =========== -->
+    <main class="main-wrapper">      
+
+      <!-- ========== section start ========== -->      
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== NEW header(title) start ========== -->
+          <div class="row">
+            <div class="col">              
+              <div class="icon-card mb-30 justify-content-center">
+                <h1>반려견 목줄 탐지 시스템</h1>                
+              </div>
+            </div>                         
+          </div>
+          <!-- ========== NEW header(title) end ========== -->
+
+          <!-- ========== REAL section start ========== -->
+          <!-- ========== counting_row start ========== -->
+          <div class="row">
+            <div class="col">
+              <div class="icon-card mb-20">                
+                <div class="icon orange">
+                  <i class="lni lni-warning"></i>
+                </div>                
+                <!-- End Icon Cart -->
+                <div class="col-xxl-2 col-xl-3 col-4 content">
+                  <h4 >오늘의 알림 횟수</h4>                  
+                </div>
+                <div class="content">
+                  <h1 class="text-bold text-danger">{{question_list.total}} 회</h1>
+                </div>
+              </div>              
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End counting_row -->
+          <!-- ========== chart_row start ========== -->
+          <div class="row">            
+            <div class="col">
+              <div class="card-style mb-20">                
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap                    
+                    justify-content-between
+                  "
+                >
+                  <div class="left">
+                    <h4 class="text-bold mb-20">시간대별 알림 횟수</h4>
+                  </div>                  
+                </div>
+                <!-- End Title -->
+                <div class="chart">                  
+                  <canvas
+                    id="Chart1"
+                    style="width: 100%; height: 250px;"
+                  ></canvas>
+                </div>
+              </div>
+            </div>
+            <!-- End Col -->            
+          </div>
+          <!-- End Row -->
+
+          <!-- ========== table_row start ========== -->
+          <div class="row">            
+            <div class="col-lg">
+              <div class="card-style mb-20">
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap
+                    justify-content-between
+                    align-items-center
+                  "
+                >                  
+                  <div class="left">                    
+                    <h4 class="text-bold mb-2">기록</h4>                                          
+                  </div>
+                  <div class='right'>
+                    <a class="text-small" href="/data">더보기</a>                    
+                  </div>
+                </div>
+                <!-- End Title -->
+                <div class="table-responsive">
+                  <table class="table recode-table">
+                    <thead>
+                      <tr>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            화면
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            위치
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            시간
+                          </h6>
+                        </th>                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for dog in doglist %}
+                      <tr>
+                        <td>
+                          <div class="capture justify-content-center">
+                            <div class="image">
+                              <a data-fancybox data-src="{{ url_for('static', filename=dog.filename ) }}" data-caption='이미지 크게보기'>
+                                <img src="{{ url_for('static', filename=dog.filename ) }}"/>
+                              </a>
+                            </div>                            
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-center">
+                            <span class="status-btn close-btn">{{dog.location}}</span>
+                          </p>
+                        </td>                        
+                        <td>
+                          <p class="text-sm text-center">{{dog.time}}</p>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <!-- End Table -->
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <!-- 페이지번호 -->
+                      {% for page_num in question_list.max_page %} {% if page_num ==
+                      question_list.page %}
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="javascript:void(0)">{{ page_num }}</a>
+                      </li>
+                      {% elif -5 < page_num - question_list.page < 5 %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                      </li>
+                      {% endif %} {% endfor %}
+                    </ul>
+                    <!-- <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link"><</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">></a>
+                      </li>
+                    </ul> -->
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->          
+        </div>
+        <!-- end container -->
+      </section>
+      <!-- ========== section end ========== -->
+
+      <!-- ========== footer start =========== -->
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 order-last order-md-first">
+              <div class="copyright text-center text-md-start">
+                <p class="text-sm">
+                  Designed and Developed by
+                  <a
+                    href="#"
+                    rel="nofollow"                    
+                  >
+                    Okeydogi
+                  </a>
+                </p>
+              </div>
+            </div>
+            <!-- end col-->
+            <div class="col-md-6">
+              <div
+                class="
+                  terms
+                  d-flex
+                  justify-content-center justify-content-md-end
+                "
+              >                
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end container -->
+      </footer>
+      <!-- ========== footer end =========== -->
+    </main>
+    <!-- ======== main-wrapper end =========== -->
+
+    <!-- ========= All Javascript files linkup ======== -->
+    <script src="{{ url_for('static', filename='./assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/dynamic-pie-chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/fullcalendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/jvectormap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/world-merc.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/polyfill.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/fancybox.umd.js') }}"></script>
+
+
+    <script>    
+      // =========== chart_start
+      const ctx3 = document.getElementById("Chart1").getContext("2d");
+      const chart1 = new Chart(ctx3, {        
+        data: {
+          labels: [
+            "AM 06",
+            "AM 07",
+            "AM 08",
+            "AM 09",
+            "AM 10",
+            "AM 11",
+            "AM 12",
+            "PM 01",
+            "PM 02",
+            "PM 03",
+            "PM 04",
+            "PM 05",
+            "PM 06",
+            "PM 07",
+            "PM 08",
+            "PM 09",
+            "PM 10",
+            "PM 11",
+          ],
+          // Information about the dataset
+          datasets: [{
+            label: "발견수",
+            backgroundColor: "#4A6CF7",          
+            minbarThickness: 30,
+            maxBarThickness: 70,
+            data: {{t_list}},            
+            type: 'bar'          
+          }, {
+            label: "어제평균",
+            backgroundColor: "#FCF4f1",
+            borderColor: "#EA6039",
+            data: {{y_list}},
+            pointBackgroundColor: "transparent",
+            pointHoverBackgroundColor: "#9b51e0",
+            pointBorderColor: "transparent",
+            pointHoverBorderColor: "#fff",
+            pointHoverBorderWidth: 3,
+            pointBorderWidth: 5,
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            type: 'line'     
+          }],
+        },
+        // Configuration options
+        options: {
+          borderColor: "#F3F6F8",
+          borderWidth: 15,
+          backgroundColor: "#F3F6F8",
+          tooltips: {
+            callbacks: {
+              labelColor: function (tooltipItem, chart) {
+                return {
+                  backgroundColor: "rgba(104, 110, 255, .0)",
+                };
+              },
+            },
+            backgroundColor: "#F3F6F8",
+            titleFontColor: "#8F92A1",
+            titleFontSize: 12,
+            bodyFontColor: "#171717",
+            bodyFontStyle: "bold",
+            bodyFontSize: 14,
+            multiKeyBackground: "transparent",
+            displayColors: false,
+            xPadding: 30,
+            yPadding: 10,
+            bodyAlign: "center",
+            titleAlign: "center",            
+            borderColor: "rgba(143, 146, 161, .1)",
+            borderWidth: 1,
+            },
+
+          title: {
+            display: false,
+          },
+          
+          legend: {
+            display : false,
+          },
+
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawTicks: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  padding: 35,                  
+                  min: 0,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                  color: "rgba(143, 146, 161, .1)",
+                  zeroLineColor: "rgba(143, 146, 161, .1)",
+                },
+                ticks: {
+                  padding: 20,
+                },
+              },
+            ],
+          },
+        },
+      });
+      // =========== chart end
+    </script>
+  </body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='./assets/images/CI_v1.png') }}"
+      type="image/x-icon"
+    />
+    <title>Dog without LEASH Detection | OKDG Admin</title>
+
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/lineicons.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/materialdesignicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/main.css') }}" />
+  </head>
+  <body>   
+    <!-- ======== main-wrapper start =========== -->
+    <main class="main-wrapper">
+      <!-- ========== header start ========== -->
+      <!-- <header class="header">        
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-6">
+              <div class="header-left">
+                <h1>반려견 목줄 탐지 시스템</h1>              
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="header-right">
+                <h6>Admin</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header> -->
+      <!-- ========== header end ========== -->
+
+      <!-- ========== section start ========== -->
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== NEW header start ========== -->
+          <div class="row">
+            <div class="col">              
+              <div class="icon-card mb-30">
+                <div class="col-lg-8 col-md-8 col-6">                  
+                  <h1>반려견 목줄 탐지 시스템</h1>                
+                </div>
+                <div class="col-1">
+                  <h6>Admin</h6>
+                </div>
+              </div>
+            </div>                         
+          </div>
+          <!-- ========== NEW header end ========== -->
+          <!-- ========== REAL section start ========== -->
+          <!-- ========== counting_row start ========== -->
+          <div class="row">
+            <div class="col-xl-4 col-lg-6 col-sm-12">
+              <div class="icon-card mb-30">
+                <div class="icon orange">
+                  <i class="lni lni-warning"></i>
+                </div>                
+              <!-- End Icon Cart -->
+                <div class="content">
+                  <h6 class="mb-10">오늘의 알람 횟수</h6>
+                  <h3 class="text-bold text-danger mb-10">10 회</h3>                  
+                </div>
+              </div>
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-4 col-lg-6 col-sm-12">
+              <div class="icon-card mb-30">
+                <div class="icon success">
+                  <i class="lni lni-popup"></i>
+                </div>
+                <!-- End Icon Cart -->
+                <div class="content">
+                  <h6 class="mb-10">이번주 일평균</h6>
+                  <h3 class="text-bold mb-10">8.9 회</h3>                  
+                </div>
+              </div>              
+            </div>
+            <!-- End Col -->
+            <div class="col-xl-4 col-lg-6 col-sm-12">
+              <div class="icon-card mb-30">
+                <div class="icon primary">
+                  <i class="lni lni-calendar"></i>
+                </div>
+                <!-- End Icon Cart -->
+                <div class="content">
+                  <h6 class="mb-10">월간 일평균</h6>
+                  <h3 class="text-bold mb-10">15.6 회</h3>                  
+                </div>
+              </div>              
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End counting_row -->
+          <!-- ========== chart_row start ========== -->
+          <div class="row">
+            <!-- <div class="col-xl-6 col-sm-12">
+              <div class="card-style mb-20">
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap
+                    justify-content-between
+                  "
+                >
+                  <div class="left">                    
+                    <h6 class="text-bold mb-2">목줄 탐지 비율</h6>
+                  </div>
+                  <div class="right">
+                    <div class="select-style-1">
+                      <div class="select-position select-sm">
+                        <select class="light-bg">
+                          <option value="">오늘</option>
+                          <option value="">주간</option>
+                          <option value="">월간</option>
+                          <option value="">연간</option>
+                        </select>
+                      </div>
+                    </div> -->
+                    <!-- end select -->
+                  <!-- </div>
+                </div> -->
+                <!-- End Title -->
+                <!-- <div class="chart">
+                  <canvas
+                    id="Chart1"
+                    style="width: 100%; height: 250px;"
+                  ></canvas>
+                </div> -->
+                <!-- End Chart -->
+              <!-- </div>
+            </div> -->
+            <!-- End Col -->
+            <div class="col-xl-6 col-sm-12">
+              <div class="card-style mb-20">
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap                    
+                    justify-content-between
+                  "
+                >
+                  <div class="left">
+                    <h6 class="text-bold mb-2">요일별 알림 횟수</h6>
+                  </div>
+                  <div class="right">
+                    <div class="select-style-1">
+                      <div class="select-position select-sm">
+                        <select class="light-bg">
+                          <option value="">이번주</option>
+                          <option value="">지난주</option>
+                          <option value="">월간</option>
+                          <option value="">연간</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- end select -->
+                  </div>
+                </div>
+                <!-- End Title -->
+                <div class="chart">
+                  <canvas
+                    id="Chart2"
+                    style="width: 100%; height: 300px;"
+                  ></canvas>
+                </div>
+                <!-- End Chart -->
+              </div>
+            </div>
+            <!-- End Col -->           
+            <div class="col-xl-6 col-sm-12">
+              <div class="card-style mb-20">                
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap                    
+                    justify-content-between
+                  "
+                >
+                  <div class="left">
+                    <h6 class="text-bold mb-2">시간대별 알림 횟수</h6>
+                  </div>
+                  <div class="right">
+                    <div class="select-style-1">
+                      <div class="select-position select-sm">
+                        <select class="light-bg">
+                          <option value="">오늘</option>
+                          <option value="">주간</option>
+                          <option value="">월간</option>
+                          <option value="">연간</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- end select -->
+                  </div>
+                </div>
+                <!-- End Title -->
+                <div class="chart">
+                  <!-- <div id="legend3">
+                    <ul
+                      class="legend3 d-flex flex-wrap align-items-center mb-30"
+                    >
+                      <li>
+                        <div class="d-flex">
+                          <span class="bg-color primary-bg"> </span>
+                          <div class="text">
+                            <p class="text-sm text-success">
+                              <span class="text-dark">Revenue</span> +25.55%
+                              <i class="lni lni-arrow-up"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="d-flex">
+                          <span class="bg-color purple-bg"></span>
+                          <div class="text">
+                            <p class="text-sm text-success">
+                              <span class="text-dark">Net Profit</span> +45.55%
+                              <i class="lni lni-arrow-up"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="d-flex">
+                          <span class="bg-color orange-bg"></span>
+                          <div class="text">
+                            <p class="text-sm text-danger">
+                              <span class="text-dark">Order</span> -4.2%
+                              <i class="lni lni-arrow-down"></i>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div> -->
+                  <canvas
+                    id="Chart3"
+                    style="width: 100%; height: 300px;"
+                  ></canvas>
+                </div>
+              </div>
+            </div>
+            <!-- End Col -->
+            
+          </div>
+          <!-- End Row -->
+          <div class="row">            
+            <div class="col-lg">
+              <div class="card-style mb-20">
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap
+                    justify-content-between
+                    align-items-center
+                  "
+                >
+                  <div class="left">
+                    <h6 class="text-bold mb-2">기록</h6>
+                  </div>
+                  <div class="right">
+                    <div class="select-style-1">
+                      <div class="select-position select-sm">
+                        <select class="light-bg">
+                          <option value="">오늘</option>
+                          <option value="">주간</option>
+                          <option value="">월간</option>
+                          <option value="">연간</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- end select -->
+                  </div>
+                </div>
+                <!-- End Title -->
+                <div class="table-responsive">
+                  <table class="table recode-table">
+                    <thead>
+                      <tr>
+                        <th>
+                          <h6 class="text-sm text-medium">
+                            Image
+                          </h6>
+                        </th>
+                        <th class="min-width">
+                          <h6 class="text-sm text-medium">
+                            Leash
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium">
+                            Day
+                          </h6>
+                        </th>
+                        <th class="min-width">
+                          <h6 class="text-sm text-medium">
+                            Date
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium">
+                            Time
+                          </h6>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="product">
+                            <div class="image">
+                              <img
+                                src="{{ url_for('static', filename='./assets/images/capture/capture-1.png') }}"
+                                alt=""
+                                data-bs-toggle="modal"
+                                data-bs-target="#imgBig"
+                              />
+                              <div class="modal fade" id="imgBig" tabindex="-1" aria-labelledby="imgBigLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="imgBigLabel">Image capture</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <img src="{{ url_for('static', filename='./assets/images/capture/capture-1.png') }}"/>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <p class="text-sm">입구1</p>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="status-btn close-btn">X</span>
+                        </td>
+                        <td>
+                          <p class="text-sm">23-02-14</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">화</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">13:45:45</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="product">
+                            <div class="image">
+                              <img
+                                src="{{ url_for('static', filename='./assets/images/capture/capture-2.png') }}"
+                                alt=""
+                              />
+                            </div>
+                            <p class="text-sm">입구1</p>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="status-btn success-btn">O</span>
+                        </td>
+                        <td>
+                          <p class="text-sm">23-02-14</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">화</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">13:25:45</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="product">
+                            <div class="image" >
+                              <img
+                                src="{{ url_for('static', filename='./assets/images/capture/capture-3.png') }}"
+                                alt=""
+                              />
+                            </div>
+                            <p class="text-sm">입구1</p>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="status-btn success-btn">O</span>
+                        </td>
+                        <td>
+                          <p class="text-sm">23-02-14</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">화</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">11:25:45</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="product">
+                            <div class="image">
+                              <img
+                                src="{{ url_for('static', filename='./assets/images/capture/capture-4.png') }}"
+                                alt=""
+                              />
+                            </div>
+                            <p class="text-sm">입구1</p>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="status-btn close-btn">X</span>
+                        </td>
+                        <td>
+                          <p class="text-sm">23-02-13</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">월</p>
+                        </td>
+                        <td>
+                          <p class="text-sm">19:25:45</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- End Table -->
+                </div>
+              </div>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->
+          <!-- <div class="row">
+            <div class="col-lg-5">
+              <div class="card-style calendar-card mb-30">
+                <div id="calendar-mini"></div>
+              </div>
+            </div> -->
+            <!-- End Col -->
+          <!-- </div> -->
+          <!-- End Row -->
+        <!-- </div> -->
+        <!-- end container -->
+      </section>
+      <!-- ========== section end ========== -->
+
+      <!-- ========== footer start =========== -->
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 order-last order-md-first">
+              <div class="copyright text-center text-md-start">
+                <p class="text-sm">
+                  Designed and Developed by
+                  <a
+                    href="#"
+                    rel="nofollow"                    
+                  >
+                    Okeydogi
+                  </a>
+                </p>
+              </div>
+            </div>
+            <!-- end col-->
+            <div class="col-md-6">
+              <div
+                class="
+                  terms
+                  d-flex
+                  justify-content-center justify-content-md-end
+                "
+              >                
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end container -->
+      </footer>
+      <!-- ========== footer end =========== -->
+    </main>
+    <!-- ======== main-wrapper end =========== -->
+
+    <!-- ========= All Javascript files linkup ======== -->
+    <script src="{{ url_for('static', filename='./assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/dynamic-pie-chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/fullcalendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/jvectormap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/world-merc.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/polyfill.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/main.js') }}"></script>
+
+    <script>
+      // ====== calendar activation
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   var calendarMiniEl = document.getElementById("calendar-mini");
+      //   var calendarMini = new FullCalendar.Calendar(calendarMiniEl, {
+      //     initialView: "dayGridMonth",
+      //     headerToolbar: {
+      //       end: "today prev,next",
+      //     },
+      //   });
+      //   calendarMini.render();
+      // });
+
+      // =========== chart one start
+      // const ctx1 = document.getElementById("Chart1").getContext("2d");
+      // const chart1 = new Chart(ctx1, {
+      //   // The type of chart we want to create
+      //   type: "pie", // also try bar or other graph types
+
+      //   // The data for our dataset
+      //   data: {
+      //     labels: [
+      //       "목줄 미착용",
+      //       "목줄 착용"
+      //     ],
+      //     // Information about the dataset
+      //     datasets: [
+      //       {
+      //         label: "발견 수",
+      //         backgroundColor: [
+      //           'rgb(255, 99, 132)',
+      //           'rgb(54, 162, 235)'
+      //         ],              
+      //         data: [
+      //           200, 100
+      //         ],
+      //         hoverOffset: 4              
+      //       },
+      //     ],
+      //   },
+
+      //   // Configuration options
+      //   defaultFontFamily: "Inter",
+      //   options: {
+      //     tooltips: {
+      //       callbacks: {
+      //         labelColor: function (tooltipItem, chart) {
+      //           return {
+      //             backgroundColor: "#ffffff",
+      //           };
+      //         },
+      //       },
+      //       intersect: false,
+      //       backgroundColor: "#f9f9f9",
+      //       titleFontFamily: "Inter",
+      //       titleFontColor: "#8F92A1",
+      //       titleFontColor: "#8F92A1",
+      //       titleFontSize: 12,
+      //       bodyFontFamily: "Inter",
+      //       bodyFontColor: "#171717",
+      //       bodyFontStyle: "bold",
+      //       bodyFontSize: 14,
+      //       multiKeyBackground: "transparent",
+      //       displayColors: false,
+      //       xPadding: 30,
+      //       yPadding: 10,
+      //       bodyAlign: "center",
+      //       titleAlign: "center",
+      //     },
+
+      //     title: {
+      //       display: false,
+      //     },
+      //     legend: {
+      //       display: true,
+      //     },
+      //   },
+      // });
+      // =========== chart one end
+
+      // =========== chart two start
+      const ctx2 = document.getElementById("Chart2").getContext("2d");
+      const chart2 = new Chart(ctx2, {
+        // The type of chart we want to create
+        type: "bar", // also try bar or other graph types
+        // The data for our dataset
+        data: {
+          labels: [
+            "일",
+            "월",
+            "화",
+            "수",
+            "목",
+            "금",
+            "토"
+          ],
+          // Information about the dataset
+          datasets: [
+            {
+              label: "",
+              backgroundColor: "#4A6CF7",
+              barThickness: 20,
+              maxBarThickness: 50,
+              data: [
+                100, 70, 50, 60, 90, 80, 130
+              ],
+            },
+          ],
+        },
+        // Configuration options
+        options: {
+          borderColor: "#F3F6F8",
+          borderWidth: 15,
+          backgroundColor: "#F3F6F8",
+          tooltips: {
+            callbacks: {
+              labelColor: function (tooltipItem, chart) {
+                return {
+                  backgroundColor: "rgba(104, 110, 255, .0)",
+                };
+              },
+            },
+            backgroundColor: "#F3F6F8",
+            titleFontColor: "#8F92A1",
+            titleFontSize: 12,
+            bodyFontColor: "#171717",
+            bodyFontStyle: "bold",
+            bodyFontSize: 14,
+            multiKeyBackground: "transparent",
+            displayColors: false,
+            xPadding: 30,
+            yPadding: 10,
+            bodyAlign: "center",
+            titleAlign: "center",
+          },
+
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false,
+          },
+
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawTicks: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  padding: 35,                  
+                  min: 0,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                  color: "rgba(143, 146, 161, .1)",
+                  zeroLineColor: "rgba(143, 146, 161, .1)",
+                },
+                ticks: {
+                  padding: 20,
+                },
+              },
+            ],
+          },
+        },
+      });
+      // =========== chart two end
+
+      // =========== chart three start
+      const ctx3 = document.getElementById("Chart3").getContext("2d");
+      const chart3 = new Chart(ctx3, {
+        // The type of chart we want to create
+        type: "line", // also try bar or other graph types
+        // The data for our dataset
+        data: {
+          labels: [
+            "AM 07",
+            "AM 09",
+            "AM 11",
+            "PM 01",
+            "PM 03",
+            "PM 05",
+            "PM 07",
+            "PM 09",
+            "PM 11",
+          ],
+          // Information about the dataset
+          datasets: [
+            {
+              label: "이번주",
+              backgroundColor: "transparent",
+              borderColor: "#4a6cf7",
+              data: [80, 120, 110, 100, 130, 150, 115, 145, 140],
+              pointBackgroundColor: "transparent",
+              pointHoverBackgroundColor: "#4a6cf7",
+              pointBorderColor: "transparent",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 3,
+              pointBorderWidth: 5,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+            },
+            {
+              label: "지난주",
+              backgroundColor: "transparent",
+              borderColor: "#9b51e0",
+              data: [120, 160, 150, 140, 165, 210, 135, 155, 170],
+              pointBackgroundColor: "transparent",
+              pointHoverBackgroundColor: "#9b51e0",
+              pointBorderColor: "transparent",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 3,
+              pointBorderWidth: 5,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+            },
+            {
+              label: "월평균",
+              backgroundColor: "transparent",
+              borderColor: "#f2994a",
+              data: [180, 110, 140, 135, 100, 90, 145, 115, 100],
+              pointBackgroundColor: "transparent",
+              pointHoverBackgroundColor: "#f2994a",
+              pointBorderColor: "transparent",
+              pointHoverBorderColor: "#fff",
+              pointHoverBorderWidth: 3,
+              pointBorderWidth: 5,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+            },
+          ],
+        },
+
+        // Configuration options
+        options: {
+          tooltips: {            
+            intersect: false,
+            backgroundColor: "#fbfbfb",
+            titleFontColor: "#8F92A1",            
+            titleFontSize: 12,
+            titleFontFamily: "Inter",
+            titleFontStyle: "400",
+            bodyFontFamily: "Inter",
+            bodyFontColor: "#171717",
+            bodyFontSize: 14,
+            multiKeyBackground: "transparent",
+            displayColors: false,
+            xPadding: 30,
+            yPadding: 10,
+            borderColor: "rgba(143, 146, 161, .1)",
+            borderWidth: 1,
+            bodyAling: "center",
+            titleAling: "center",
+            // title: false,
+          },
+
+          title: {
+            display: false,
+          },
+
+          // layout: {
+          //   padding: {
+          //     top: 0,
+          //   },
+          // },
+
+          legend: {
+            display : false,
+          },
+
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawTicks: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  padding: 35,                  
+                  min: 0,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                  color: "rgba(143, 146, 161, .1)",
+                  zeroLineColor: "rgba(143, 146, 161, .1)",
+                },
+                ticks: {
+                  padding: 20,
+                },
+              },
+            ],
+          },
+        },
+      });
+      // =========== chart three end
+
+      // ================== chart four start
+      const ctx4 = document.getElementById("Chart4").getContext("2d");
+      const chart4 = new Chart(ctx4, {
+        // The type of chart we want to create
+        type: "bar", // also try bar or other graph types
+        // The data for our dataset
+        data: {
+          labels: ["Jan", "Fab", "Mar", "Apr", "May", "Jun"],
+          // Information about the dataset
+          datasets: [
+            {
+              label: "",
+              backgroundColor: "#4A6CF7",
+              barThickness: "flex",
+              maxBarThickness: 8,
+              data: [600, 700, 1000, 700, 650, 800],
+            },
+            {
+              label: "",
+              backgroundColor: "#d50100",
+              barThickness: "flex",
+              maxBarThickness: 8,
+              data: [690, 740, 720, 1120, 876, 900],
+            },
+          ],
+        },
+        // Configuration options
+        options: {
+          borderColor: "#F3F6F8",
+          borderWidth: 15,
+          backgroundColor: "#F3F6F8",
+          tooltips: {
+            callbacks: {
+              labelColor: function (tooltipItem, chart) {
+                return {
+                  backgroundColor: "rgba(104, 110, 255, .0)",
+                };
+              },
+            },
+            backgroundColor: "#F3F6F8",
+            titleFontColor: "#8F92A1",
+            titleFontSize: 12,
+            bodyFontColor: "#171717",
+            bodyFontStyle: "bold",
+            bodyFontSize: 16,
+            multiKeyBackground: "transparent",
+            displayColors: false,
+            xPadding: 30,
+            yPadding: 10,
+            bodyAlign: "center",
+            titleAlign: "center",
+          },
+
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false,
+          },
+
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawTicks: false,
+                  drawBorder: false,
+                },
+                ticks: {
+                  padding: 35,
+                  max: 1200,
+                  min: 0,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                  drawBorder: false,
+                  color: "rgba(143, 146, 161, .1)",
+                  zeroLineColor: "rgba(143, 146, 161, .1)",
+                },
+                ticks: {
+                  padding: 20,
+                },
+              },
+            ],
+          },
+        },
+      });
+      // =========== chart four end
+
+    </script>
+  </body>
+</html>

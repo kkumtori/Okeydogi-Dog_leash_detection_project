@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='./assets/images/CI_v1.png') }}"
+      type="image/x-icon"
+    />
+    <title>DWOL | Database</title>
+
+    <!-- ========== All CSS files linkup ========= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/lineicons.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/materialdesignicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/main.css') }}" />    
+    <link rel="stylesheet" href="{{ url_for('static', filename='./assets/css/fancybox.css') }}" />
+
+  </head>
+  <body>
+    <!-- ======== main-wrapper start =========== -->
+    <main class="main-wrapper">
+      <!-- ========== section start ========== -->      
+      <section class="section">
+        <div class="container-fluid">
+          <!-- ========== NEW header(title) start ========== -->
+          <div class="row">
+            <div class="col">              
+              <div class="icon-card mb-30 justify-content-center">
+                <a href="/">
+                  <h1>반려견 목줄 탐지 시스템</h1>                
+                </a>
+              </div>
+            </div>                         
+          </div>
+          <!-- ========== NEW header(title) end ========== -->
+          <!-- ========== table_row start ========== -->
+          <div class="row">            
+            <div class="col-lg">
+              <div class="card-style mb-20">
+                <div
+                  class="
+                    title
+                    d-flex
+                    flex-wrap
+                    justify-content-between
+                    align-items-center
+                  "
+                >                  
+                  <div class="left">                    
+                    <h4 class="text-bold mb-2">기록</h4>                                          
+                  </div>
+                  <div class='right'>
+                    <div class="input-group">
+                      <!-- <span class="input-group-text text-sm">기간</span> -->
+                      <!-- <input type="datetime-local" aria-label="First Date" class="form-control text-sm">
+                      <span class="input-group-text">~</span>
+                      <input type="datetime-local" aria-label="Last Date" class="form-control text-sm">
+                      <button class="btn btn-outline-secondary" type="submit">
+                        <i class="mdi mdi-magnify"></i>
+                      </button>                     -->
+                    </div>                    
+                  </div>
+                </div>
+                <!-- End Title -->
+                <div class="table-responsive">
+                  <table class="table recode-table">
+                    <thead>
+                      <tr>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            날짜
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            화면
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            위치
+                            <!-- <button
+                              class="more-btn ml-10 dropdown-toggle"
+                              id="moreAction1"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              <i class="mdi mdi-filter"></i>
+                            </button>
+                            <ul
+                              class="dropdown-menu"
+                              aria-labelledby="moreAction1"
+                            >
+                              <li class="dropdown-item">
+                                <a href="#0" class="text-gray">camera1</a>
+                              </li>
+                              <li class="dropdown-item">
+                                <a href="#0" class="text-gray">camera2</a>
+                              </li> -->
+                            </ul>
+                          </h6>
+                        </th>
+                        <th>
+                          <h6 class="text-sm text-medium text-center">
+                            시간
+                            <!-- <button
+                              class="more-btn ml-10 dropdown-toggle"
+                              id="moreAction1"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              <i class="mdi mdi-sort"></i>
+                            </button>
+                            <ul
+                              class="dropdown-menu"
+                              aria-labelledby="moreAction1"
+                            > -->
+                              <!-- <li class="dropdown-item">
+                                <a href="#0" class="text-gray">오름차순</a>
+                              </li>
+                              <li class="dropdown-item">
+                                <a href="#0" class="text-gray">내림차순</a>
+                              </li> -->
+                            </ul>
+                          </h6>
+                        </th>                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for dog in doglist %}
+                      <tr>
+                        <td>
+                          <p class="text-sm text-center">{{dog.date}}</p>
+                        </td>                    
+                        <td>
+                          <div class="capture justify-content-center">
+                            <div class="image">
+                              <a data-fancybox data-src="{{ url_for('static', filename=dog.filename ) }}" data-caption='이미지 크게보기'>
+                                <img src="{{ url_for('static', filename=dog.filename ) }}"/>
+                              </a>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-center">
+                            <span class="status-btn close-btn">{{dog.location}}</span>
+                          </p>
+                        </td>                        
+                        <td>
+                          <p class="text-sm text-center">{{dog.time}}</p>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <!-- End Table -->
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <!-- 페이지번호 -->
+                      {% for page_num in question_list.max_page %} {% if page_num ==
+                      question_list.page %}
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="javascript:void(0)">{{ page_num }}</a>
+                      </li>
+                      {% elif -5 < page_num - question_list.page < 5 %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                      </li>
+                      {% endif %} {% endfor %}
+                    </ul>
+
+
+                    <!-- <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link"><</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">></a>
+                      </li>
+                    </ul> -->
+                  </nav>
+                </div>
+              </div>
+            </div>
+            <!-- End Col -->
+          </div>
+          <!-- End Row -->          
+        </div>
+        <!-- end container -->
+      </section>
+      <!-- ========== section end ========== -->
+  
+    <!-- ========= All Javascript files linkup ======== -->
+    <script src="{{ url_for('static', filename='./assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/dynamic-pie-chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/fullcalendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/jvectormap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/world-merc.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/polyfill.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='./assets/js/fancybox.umd.js') }}"></script>
+
+  </body>
+            
+</html>
